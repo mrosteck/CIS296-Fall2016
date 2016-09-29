@@ -1,0 +1,259 @@
+#hw 3
+//Lottery Simulator
+import java.util.Scanner;
+import java.util.Random;
+
+public class lottery {
+	public static void main(String[] args) {
+		
+		Random ran = new Random();
+		
+		int inputLottery = 0;
+		int numOfPower;
+		int numOfMega;
+		int chooseNum;
+		int numOfMatches = 0;
+		int powerballNum;
+		int megamillNum;
+		int moneySpent = 0;
+		int moneyWon = 0;
+		int moneyLost = 0;
+		Scanner input = new Scanner(System.in);
+		int[] pbArray;
+		pbArray = new int[5];
+		int randPbNum;
+		int randMNum;
+		int[] powNum;
+		powNum = new int[5];
+		int powerballMatch = 0;
+		int[] megaArray = new int[5];
+		int[] megaNum = new int[5];
+		int megaMatch = 0;
+		
+		while(inputLottery != 3){
+			
+			
+			
+		System.out.print("Which lottery would you like to play?\n");
+		System.out.print("To play the Powerball enter: 1\n");
+		System.out.print("To play the MegeMillions enter: 2\n");
+		System.out.print("To stop playing enter: 3\n");
+		inputLottery = input.nextInt();
+		
+		if(inputLottery == 1){
+			System.out.print("How many PowerBall tickets would you like to buy?");
+			numOfPower = input.nextInt();
+			moneySpent = numOfPower * 2;
+			
+			//Generates Powerball ticket
+			for(int k = 0; k<5;k++){
+					pbArray[k] = ran.nextInt(69)+1;
+				}//for array
+				randPbNum = ran.nextInt(26)+1;
+				
+			for(int i = 0; i < numOfPower;i++){
+				System.out.print("\nWould you like to choose your own number?\n");
+				System.out.print("Enter 1 for yes or 0 for no: ");
+				chooseNum = input.nextInt();
+				
+				if(chooseNum == 1){
+					System.out.print("Please enter your first 5 numbers(1-69), press enter after each numer");
+					for(int j = 0;j<5;j++){
+						powNum[i] = input.nextInt();
+					}
+					
+					System.out.print("Enter your Powerball number(1-26)");
+					powerballNum = input.nextInt();
+					System.out.print("Your numbers are: " + powNum[0] + " " + powNum[1] + " " + powNum[2] + " " + powNum[3] + " " + powNum[4] + " " + powerballNum + "\n");
+					
+				}//if
+				else{
+					for(int j = 0;j<5;j++){
+						powNum[j] = ran.nextInt(69)+1;
+					}
+					powerballNum = ran.nextInt(26)+1;
+					
+					System.out.print("Your numbers are: " + powNum[0] + " " + powNum[1] + " " + powNum[2] + " " + powNum[3] + " " + powNum[4] + " " + powerballNum + "\n");
+						
+				}//else
+				
+				for(int j = 0; j < 5; j ++){
+					if (pbArray[j]==powNum[0] || pbArray[j]==powNum[1] ||pbArray[j]==powNum[2] ||pbArray[j]==powNum[3] ||pbArray[j]==powNum[4]){
+						numOfMatches = numOfMatches +1;
+					}
+				}//for
+				if(randPbNum == powerballNum){
+						powerballMatch = 1;
+						moneyWon = moneyWon + 4;
+					}
+				if(numOfMatches == 1){
+					if(powerballMatch == 1){
+						moneyWon = moneyWon + 4;
+					}
+										
+				}
+				else if(numOfMatches == 2){
+					if(powerballMatch == 1){
+						moneyWon = moneyWon + 7;
+					}
+					
+				}
+				else if(numOfMatches == 3){
+					if(powerballMatch == 1){
+						moneyWon = moneyWon + 100;
+					}
+					else{
+						moneyWon = moneyWon + 7;
+					}
+					
+				}
+				else if(numOfMatches == 4){
+					if(powerballMatch == 1){
+						moneyWon = moneyWon + 50000;
+					}
+					else{
+						moneyWon = moneyWon + 100;
+					}
+					
+				}
+				else if(numOfMatches == 5){
+					if(powerballMatch == 1){
+						moneyWon = moneyWon + 60000000;
+					}
+					else{
+						moneyWon = moneyWon + 1000000;
+					}
+				}
+				numOfMatches = 0;
+				
+			}//for
+				System.out.print("The Powerball numbers are: ");
+				for(int k = 0; k<5;k++){
+					System.out.print(pbArray[k] + " ");
+				}
+				System.out.print(randPbNum);
+			System.out.print("\nYou won: $" + moneyWon + "\n");	
+			System.out.print("You spent: $" + moneySpent + "\n");
+			int netLoss = moneyWon - moneySpent;
+			if(netLoss <= 0)
+			{
+			System.out.print("Your net loss is: $" + Math.abs(netLoss) + "\n");
+			}
+			else{
+				System.out.print("Your net loss is : $0\n");
+			}
+				
+				
+		}//if
+		else if(inputLottery == 2){
+			System.out.print("How many Megamillion tickets would you like to buy?");
+			numOfMega = input.nextInt();
+			moneySpent = numOfMega;
+			
+			//Generates Megamillions ticket
+			for(int k = 0; k<5;k++){
+					megaArray[k] = ran.nextInt(69)+1;
+				}//for array
+				randMNum = ran.nextInt(26)+1;
+				
+			for(int i = 0; i < numOfMega;i++){
+				System.out.print("\nWould you like to choose your own number?\n");
+				System.out.print("Enter 1 for yes or 0 for no: ");
+				chooseNum = input.nextInt();
+				
+				if(chooseNum == 1){
+					System.out.print("Please enter your first 5 numbers(1-75), press enter after each numer");
+					for(int j = 0;j<5;j++){
+						megaNum[i] = input.nextInt();
+					}
+					
+					System.out.print("Enter your Megamillion number(1-15)");
+					megamillNum = input.nextInt();
+					System.out.print("Your numbers are: " + megaNum[0] + " " + megaNum[1] + " " + megaNum[2] + " " + megaNum[3] + " " + megaNum[4] + " " + megamillNum + "\n");
+					
+				}//if
+				else{
+					for(int j = 0;j<5;j++){
+						megaNum[j] = ran.nextInt(75)+1;
+					}
+					megamillNum = ran.nextInt(15)+1;
+					
+					System.out.print("Your numbers are: " + megaNum[0] + " " + megaNum[1] + " " + megaNum[2] + " " + megaNum[3] + " " + megaNum[4] + " " + megamillNum + "\n");
+						
+				}//else
+				
+				for(int j = 0; j < 5; j ++){
+					if (megaArray[j]==megaNum[0] || megaArray[j]==megaNum[1] ||megaArray[j]==megaNum[2] ||megaArray[j]==megaNum[3] ||megaArray[j]==megaNum[4]){
+						numOfMatches = numOfMatches +1;
+					}
+				}//for
+				if(randMNum == megamillNum){
+						megaMatch = 1;
+						moneyWon = moneyWon + 4;
+					}
+				if(numOfMatches == 1){
+					if(megaMatch == 1){
+						moneyWon = moneyWon + 4;
+					}
+										
+				}
+				else if(numOfMatches == 2){
+					if(megaMatch == 1){
+						moneyWon = moneyWon + 7;
+					}
+					
+				}
+				else if(numOfMatches == 3){
+					if(megaMatch == 1){
+						moneyWon = moneyWon + 100;
+					}
+					else{
+						moneyWon = moneyWon + 7;
+					}
+					
+				}
+				else if(numOfMatches == 4){
+					if(megaMatch == 1){
+						moneyWon = moneyWon + 50000;
+					}
+					else{
+						moneyWon = moneyWon + 100;
+					}
+					
+				}
+				else if(numOfMatches == 5){
+					if(megaMatch == 1){
+						moneyWon = moneyWon + 60000000;
+					}
+					else{
+						moneyWon = moneyWon + 1000000;
+					}
+				}
+				numOfMatches = 0;
+				
+			}//for
+				System.out.print("The Megamillion numbers are: ");
+				for(int k = 0; k<5;k++){
+					System.out.print(megaArray[k] + " ");
+				}
+				System.out.print(randMNum);
+			System.out.print("\nYou won: $" + moneyWon + "\n");	
+			System.out.print("You spent: $" + moneySpent + "\n");
+			int netLoss = moneyWon - moneySpent;
+			if(netLoss <= 0)
+			{
+			System.out.print("Your net loss is: $" + Math.abs(netLoss) + "\n");
+			}
+			else{
+				System.out.print("Your net loss is : $0\n");
+			}
+			
+		}//else if
+				
+					
+		}//while
+		
+		System.out.print("Thank you for wasting your money on the lottery!");
+		
+	}//main
+}//class
